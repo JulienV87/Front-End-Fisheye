@@ -8,14 +8,41 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
+
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Fish eye logo" />
+      </a>
     </header>
+
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+
+     
+      <div class="photograph-header"></div>
+     
+
+      <div class="photograph-media">
+        <span>Trier par :</span>
+        <select aria-label="select" id="sort-media">
+          <option value="popularité" selected>Popularité</option>
+          <option value="date">Date</option>
+          <option value="titre">Titre</option>
+        </select>
       </div>
+
+      <div class="container-mdedia">
+
+
+
+      </div>
+
+
+
+      
     </main>
+
+
+   <!-- contact form -->
     <div id="contact_modal">
 			<div class="modal">
 				<header>
@@ -24,14 +51,17 @@
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
+						<label>Prénom</label> 
 						<input />
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+
+    <script src="scripts/factories/photographer-factory.js"></script>
+    <script src="scripts/factories/profile-factory.js"></script>
+    <script src="/scripts/pages/photographer-pages.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
