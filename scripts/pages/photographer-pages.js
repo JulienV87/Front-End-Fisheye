@@ -57,6 +57,11 @@ function displayMedia(photographerMedia) {
   containerMedia.innerHTML = template
 }
 
+function getCurrentlyDisplayedMedia() {
+  const containerMedia = document.querySelector('.media-container')
+  const listOfMedias = containerMedia.querySelectorAll(".media")
+  console.log(listOfMedias)
+}
 
 async function init() {
 
@@ -66,10 +71,10 @@ async function init() {
 
   const { photographerProfile, photographerMedia } = getPhotographerDataById(data, id)
 
-  displayProfile(photographerProfile);
-  displayMedia(photographerMedia);
-
-};
+  displayProfile(photographerProfile)
+  displayMedia(photographerMedia)
+  getCurrentlyDisplayedMedia()
+}
 
 init();
 

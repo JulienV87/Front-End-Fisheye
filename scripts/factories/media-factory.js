@@ -17,7 +17,16 @@ function mediaFactory(data) {
 
   function getUserMediaDOM() {
     
-    return `<article class="media">
+    return `<article class="media"
+              data-id=${id}
+              data-photographer-id=${photographerId}
+              data-image=${image}
+              data-media-url=${mediaUrl}
+              data-media-url=${video}
+              data-likes=${likes}
+              data-date=${date}
+              data-title=${title}
+            >
         <div class="media-img-wrapper">
         ${imageOrVideo}
       </div>
