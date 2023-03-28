@@ -15,20 +15,21 @@ function getPhotographerId() {
 }
 
 function getPhotographerDataById(data, id) {
-  
+
   const photographers = data.photographers
 
   const media = data.media
 
   const photographerProfile = photographers.find(p => p.id == id)
 
-  const photographerMedia = media.filter(m => m.photographerId == id) 
+  const photographerMedia = media.filter(m => m.photographerId == id)
+  console.log(photographerMedia);
 
-  return {photographerProfile, photographerMedia}
+  return { photographerProfile, photographerMedia }
 }
 
 // Display Info Profile
-async function displayData(photographerProfile) {
+function displayProfile(photographerProfile) {
 
   const headerSection = document.querySelector('.photograph-header')
 
@@ -37,18 +38,48 @@ async function displayData(photographerProfile) {
   headerSection.appendChild(userHeaderDOM)
 }
 
+//Display Media
+
+function displayMedia(photographerMedia) {
+  
+  const containerMedia = document.querySelector('.media-container')
+  let template = ""
+  photographerMedia.forEach(media => {
+    
+    const mediaModel = mediaFactory(media)
+    
+    const mediaDOM = mediaModel.getUserMediaDOM()
+    
+    template += mediaDOM
+  
+  });
+  
+  containerMedia.innerHTML = template
+}
+
 
 async function init() {
 
-    const id = getPhotographerId()
+  const id = getPhotographerId()
 
-    const data = await getAllData()
+  const data = await getAllData()
 
-    const {photographerProfile, photographerMedia} = getPhotographerDataById(data, id)
-    displayData(photographerProfile);
+  const { photographerProfile, photographerMedia } = getPhotographerDataById(data, id)
+
+  displayProfile(photographerProfile);
+  displayMedia(photographerMedia);
+
 };
 
 init();
+
+
+
+
+
+
+
+
 
 
 
