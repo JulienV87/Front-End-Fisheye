@@ -57,14 +57,78 @@ function displayMedia(photographerMedia) {
   containerMedia.innerHTML = template
 }
 
+//Display Filtered Media
+
 function getCurrentlyDisplayedMedia() {
   const containerMedia = document.querySelector('.media-container')
-  const listOfMedias = containerMedia.querySelectorAll(".media")
-  console.log(listOfMedias)
+  const arrayOfMediaElements = Array.from(containerMedia.querySelectorAll(".media"))
+  const arrayOfMediaObjects = arrayOfMediaElements.map(mediaElement => {
+    return {
+      "id": mediaElement.dataset.id,
+      "photographerId": mediaElement.dataset.photographerId,
+      "image": mediaElement.dataset.image,
+      "video": mediaElement.dataset.video,
+      "likes": mediaElement.dataset.likes,
+      "date": mediaElement.dataset.date,
+      "title": mediaElement.dataset.title
+    }
+  })
+  
+  return arrayOfMediaObjects
+  
+}
+
+
+const selectSorting = document.getElementById("sort-media");
+
+selectSorting.addEventListener('change', displayMediaSorting);
+
+function displayMediaSorting (getCurrentlyDisplayedMedia) {
+  console.log(getCurrentlyDisplayedMedia);
+
+  let sortedLikes = getCurrentlyDisplayedMedia
+  console.log(sortedLikes)
+
+  
+  //Sorting by comparing the value
+  if (selectSorting.value === 'popularity'){
+    console.log(selectSorting.value)
+    sortedLikes.sort((a,b)=> b.likes - a.likes);
+  
+    console.log(sortedLikes)
+  
+  } else if (selectSorting.value === 'title') {
+
+    sortedLikes.sort((a, b)=> {
+      const nameA = a.title.toUpperCase()
+      const nameB = b.title.toUpperCase()
+
+          if (nameA < nameB) {
+              return -1;
+          }
+          if (nameA > nameB ) {
+              return 1;
+          }
+              return 0;
+      });
+      console.log(sortedLikes)
+
+  } else if (selectSorting.value === 'date') {
+  
+    sortedLikes.sort(function compare(a, b) {
+          if (a.date < b.date) {
+              return 1;
+          }
+          if (a.date > b.date ) {
+              return -1;
+          }
+              return 0;
+      });
+}
 }
 
 async function init() {
-
+  
   const id = getPhotographerId()
 
   const data = await getAllData()
@@ -73,7 +137,13 @@ async function init() {
 
   displayProfile(photographerProfile)
   displayMedia(photographerMedia)
-  getCurrentlyDisplayedMedia()
+  const currentlyDisplayedMedia = getCurrentlyDisplayedMedia()
+  const mediaSorted = displayMediaSorting (currentlyDisplayedMedia)
+
+  
+  displayMedia(mediaSorted)
+  console.log(mediaSorted)
+  
 }
 
 init();

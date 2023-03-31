@@ -17,11 +17,12 @@ function getUserHeaderDOM() {
     h2.textContent = `${city}, ${country}`
     const p = document.createElement('p')
     p.textContent = tagline
-    // const priceInfo = document.createElement('p')
-    // priceInfo.textContent = `${price}/jours`
+    const priceInfo = document.createElement('p')
+    priceInfo.textContent = `${price}/jours`
     const btn = document.createElement('button')
     btn.setAttribute('class', 'contact_button')
     btn.textContent = 'Contactez moi'
+    btn.addEventListener("click",displayModal)
 
     const img = document.createElement('img')
     img.setAttribute('src', picture)

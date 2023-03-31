@@ -24,9 +24,9 @@
       <div class="photograph-media">
         <span>Trier par :</span>
         <select aria-label="select" id="sort-media">
-          <option value="popularité" selected>Popularité</option>
+          <option value="popularity" selected>Popularité</option>
           <option value="date">Date</option>
-          <option value="titre">Titre</option>
+          <option value="title">Titre</option>
         </select>
       </div>
 
@@ -38,19 +38,37 @@
    <!-- contact form -->
     <div id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label> 
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+				<header role="banner">
+          <div class="title">
+              <h1 id="modalTitle" class="name">Contactez-moi </h1>
+          </div>
+        <img aria-label="Fermer la boîte de dialogue" role="button" src="assets/icons/close.svg" onclick="closeModal()"  alt="close.svg"/>
+      </header>
+      <form role="form">
+          <div class="formData">
+              <label for="first-name">Prénom</label>
+              <input type="text" id="first-name" class="text-control"/>
+          </div>
+
+          <div class="formData">
+              <label for="last-name">Nom</label>
+              <input type="text" id="last-name" class="text-control"/>
+          </div>
+
+          <div class="formData">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="text-control"/>
+          </div>
+
+          <div class="formData">
+              <label for="message">Votre message</label>
+              <textarea id="message" class="text-control"></textarea>
+          </div>
+
+          <button role="button" type="submit" id="submit" class="submit_button" onclick="return validate()">Envoyer</button>
+      </form>
+  </div>
+</div>
 
     <script src="scripts/factories/media-factory.js"></script>
     <script src="scripts/factories/profile-factory.js"></script>

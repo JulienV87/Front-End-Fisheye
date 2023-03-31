@@ -5,7 +5,7 @@ function mediaFactory(data) {
   let mediaUrl = "";
   let imageOrVideo = "";
 
-  if (image) {
+  if (image && image != "undefined") {
     mediaUrl = `./assets/sample-photos/${photographerId}/${image}`;
     imageOrVideo = `<img class="media-img" src="${mediaUrl}"/>`;
   } else {
@@ -21,8 +21,7 @@ function mediaFactory(data) {
               data-id=${id}
               data-photographer-id=${photographerId}
               data-image=${image}
-              data-media-url=${mediaUrl}
-              data-media-url=${video}
+              data-video=${video}
               data-likes=${likes}
               data-date=${date}
               data-title=${title}
@@ -42,3 +41,4 @@ function mediaFactory(data) {
 
   return { getUserMediaDOM };
 }
+

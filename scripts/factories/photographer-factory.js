@@ -28,6 +28,7 @@ function photographerFactory(data) {
     article.appendChild(priceInfo);
 
     return a;
+    
   }
   return { getUserCardDOM };
 }
