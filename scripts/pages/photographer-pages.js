@@ -57,6 +57,8 @@ function displayMedia(photographerMedia) {
   containerMedia.innerHTML = template
 }
 
+
+
 //Display Filtered Media
 
 function getCurrentlyDisplayedMedia() {
@@ -78,28 +80,20 @@ function getCurrentlyDisplayedMedia() {
   
 }
 
-
-const selectSorting = document.getElementById("sort-media");
-
-selectSorting.addEventListener('change', displayMediaSorting);
-
-function displayMediaSorting (getCurrentlyDisplayedMedia) {
-  console.log(getCurrentlyDisplayedMedia);
-
-  let sortedLikes = getCurrentlyDisplayedMedia
-  console.log(sortedLikes)
-
+function displayMediaSorting (event) {
+  // const selectSorting = event.target;
+  const selectSorting = document.getElementById("sort-media");
+  const currentlyDisplayedMedia = getCurrentlyDisplayedMedia()
   
   //Sorting by comparing the value
   if (selectSorting.value === 'popularity'){
-    console.log(selectSorting.value)
-    sortedLikes.sort((a,b)=> b.likes - a.likes);
+    currentlyDisplayedMedia.sort((a,b)=> b.likes - a.likes);
   
-    console.log(sortedLikes)
+    console.log("popularity")
   
   } else if (selectSorting.value === 'title') {
 
-    sortedLikes.sort((a, b)=> {
+    currentlyDisplayedMedia.sort((a, b)=> {
       const nameA = a.title.toUpperCase()
       const nameB = b.title.toUpperCase()
 
@@ -111,11 +105,11 @@ function displayMediaSorting (getCurrentlyDisplayedMedia) {
           }
               return 0;
       });
-      console.log(sortedLikes)
+      console.log('title')
 
   } else if (selectSorting.value === 'date') {
   
-    sortedLikes.sort(function compare(a, b) {
+    currentlyDisplayedMedia.sort(function compare(a, b) {
           if (a.date < b.date) {
               return 1;
           }
@@ -124,7 +118,9 @@ function displayMediaSorting (getCurrentlyDisplayedMedia) {
           }
               return 0;
       });
-}
+    console.log('date');
+  }
+  displayMedia(currentlyDisplayedMedia)
 }
 
 async function init() {
@@ -137,13 +133,13 @@ async function init() {
 
   displayProfile(photographerProfile)
   displayMedia(photographerMedia)
-  const currentlyDisplayedMedia = getCurrentlyDisplayedMedia()
-  const mediaSorted = displayMediaSorting (currentlyDisplayedMedia)
+  // const currentlyDisplayedMedia = getCurrentlyDisplayedMedia()
+  // const mediaSorted = displayMediaSorting (currentlyDisplayedMedia)
+  // displayMedia(mediaSorted)
+  displayMediaSorting(null)
+  const selectSorting = document.getElementById("sort-media");
+  selectSorting.addEventListener('change', displayMediaSorting);
 
-  
-  displayMedia(mediaSorted)
-  console.log(mediaSorted)
-  
 }
 
 init();

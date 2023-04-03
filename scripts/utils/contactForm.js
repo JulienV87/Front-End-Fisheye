@@ -1,13 +1,19 @@
 const modal = document.getElementById("contact_modal");
 const header = document.querySelector('.header');
 const main = document.querySelector('.main');
-const contactBTN = document.querySelector('.submit_button');
+
+const contactModalForm = document.querySelector('#contact_modal__form').addEventListener("submit",validate);
+
+const closeModalIcon = document.querySelector("#close-icon").addEventListener("click", closeModal);
+
 const firstName = document.getElementById('first-name');
 const lastName = document.getElementById('last-name');
 const email = document.getElementById('email');
 const message = document.getElementById('message');
 const submit = document.getElementById('submit');
 const form = document.querySelector('.modal form');
+
+
 
 const name_regex = /^[A-zÀ-ú]+$/;
 
@@ -31,7 +37,7 @@ function closeModal() {
     header.setAttribute('aria-hidden', 'false');
     main.style.opacity = '1';
     main.setAttribute('aria-hidden', 'false');
-    contactBTN.focus();
+    contactModalForm.focus();
 }
 
 function addError(element, message) {
@@ -82,8 +88,8 @@ function checkError(element, nbCharacters, message, regex) {
     }
 }
 
-function validate() {
-
+function validate(event) {
+    event.preventDefault()
     if (checkError(firstName, 2, 'Le champ prénom doit contenir au minimum 2 caractères', name_regex)
     &&
     checkError(lastName, 2, 'Le champ nom doit contenir au minimum 2 caractères', name_regex)

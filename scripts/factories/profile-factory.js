@@ -4,6 +4,12 @@ function profilFactory(data) {
     const { name, portrait, city, country, tagline, price } = data
   
     const picture = `assets/photographers/${portrait}`
+
+    //Customize title contact form with name
+    const titleContactName = document.querySelector("#modalTitle");
+    titleContactName.innerHTML = `Contactez-moi ${name}`
+
+
    
 
 // creation of elements

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/photographer.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
@@ -42,9 +44,9 @@
           <div class="title">
               <h1 id="modalTitle" class="name">Contactez-moi </h1>
           </div>
-        <img aria-label="Fermer la boîte de dialogue" role="button" src="assets/icons/close.svg" onclick="closeModal()"  alt="close.svg"/>
+        <img id="close-icon" aria-label="Fermer la boîte de dialogue" role="button" src="assets/icons/close.svg" alt="close.svg"/>
       </header>
-      <form role="form">
+      <form role="form" id="contact_modal__form">
           <div class="formData">
               <label for="first-name">Prénom</label>
               <input type="text" id="first-name" class="text-control"/>
@@ -65,7 +67,7 @@
               <textarea id="message" class="text-control"></textarea>
           </div>
 
-          <button role="button" type="submit" id="submit" class="submit_button" onclick="return validate()">Envoyer</button>
+          <button role="button" type="submit" id="submit" class="submit_button" >Envoyer</button>
       </form>
   </div>
 </div>
