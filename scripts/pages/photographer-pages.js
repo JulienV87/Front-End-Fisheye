@@ -23,7 +23,6 @@ function getPhotographerDataById(data, id) {
   const photographerProfile = photographers.find(p => p.id == id)
 
   const photographerMedia = media.filter(m => m.photographerId == id)
-  console.log(photographerMedia);
 
   return { photographerProfile, photographerMedia }
 }
@@ -41,90 +40,66 @@ function displayProfile(photographerProfile) {
 //Display Media
 
 function displayMedia(photographerMedia) {
-  
   const containerMedia = document.querySelector('.media-container')
   let template = ""
   photographerMedia.forEach(media => {
-    
+
     const mediaModel = mediaFactory(media)
-    
+
     const mediaDOM = mediaModel.getUserMediaDOM()
-    
+
     template += mediaDOM
-  
+
   });
-  
+
   containerMedia.innerHTML = template
+  lightboxApp.handleLightBox()
 }
 
 
 
 //Display Filtered Media
 
-function getCurrentlyDisplayedMedia() {
-  const containerMedia = document.querySelector('.media-container')
-  const arrayOfMediaElements = Array.from(containerMedia.querySelectorAll(".media"))
-  const arrayOfMediaObjects = arrayOfMediaElements.map(mediaElement => {
-    return {
-      "id": mediaElement.dataset.id,
-      "photographerId": mediaElement.dataset.photographerId,
-      "image": mediaElement.dataset.image,
-      "video": mediaElement.dataset.video,
-      "likes": mediaElement.dataset.likes,
-      "date": mediaElement.dataset.date,
-      "title": mediaElement.dataset.title
-    }
-  })
-  
-  return arrayOfMediaObjects
-  
-}
 
-function displayMediaSorting (event) {
-  // const selectSorting = event.target;
+function sortMedia(mediaList) {
   const selectSorting = document.getElementById("sort-media");
-  const currentlyDisplayedMedia = getCurrentlyDisplayedMedia()
-  
-  //Sorting by comparing the value
-  if (selectSorting.value === 'popularity'){
-    currentlyDisplayedMedia.sort((a,b)=> b.likes - a.likes);
-  
-    console.log("popularity")
-  
-  } else if (selectSorting.value === 'title') {
 
-    currentlyDisplayedMedia.sort((a, b)=> {
-      const nameA = a.title.toUpperCase()
-      const nameB = b.title.toUpperCase()
+  selectSorting.addEventListener('change', () => {
 
-          if (nameA < nameB) {
-              return -1;
-          }
-          if (nameA > nameB ) {
-              return 1;
-          }
-              return 0;
+    if (selectSorting.value === 'popularity')
+      mediaList.sort((a, b) => b.likes - a.likes);
+
+    else if (selectSorting.value === 'title')
+
+      mediaList.sort((a, b) => {
+        const nameA = a.title.toUpperCase()
+        const nameB = b.title.toUpperCase()
+
+        if (nameA < nameB)
+          return -1;
+        if (nameA > nameB)
+          return 1;
+        return 0;
       });
-      console.log('title')
 
-  } else if (selectSorting.value === 'date') {
-  
-    currentlyDisplayedMedia.sort(function compare(a, b) {
-          if (a.date < b.date) {
-              return 1;
-          }
-          if (a.date > b.date ) {
-              return -1;
-          }
-              return 0;
+    else if (selectSorting.value === 'date')
+      mediaList.sort(function compare(a, b) {
+        if (a.date < b.date)
+          return 1;
+        if (a.date > b.date)
+          return -1;
+        return 0;
       });
-    console.log('date');
-  }
-  displayMedia(currentlyDisplayedMedia)
+
+    displayMedia(mediaList)
+  })
+
 }
+
+
 
 async function init() {
-  
+
   const id = getPhotographerId()
 
   const data = await getAllData()
@@ -133,13 +108,7 @@ async function init() {
 
   displayProfile(photographerProfile)
   displayMedia(photographerMedia)
-  // const currentlyDisplayedMedia = getCurrentlyDisplayedMedia()
-  // const mediaSorted = displayMediaSorting (currentlyDisplayedMedia)
-  // displayMedia(mediaSorted)
-  displayMediaSorting(null)
-  const selectSorting = document.getElementById("sort-media");
-  selectSorting.addEventListener('change', displayMediaSorting);
-
+  sortMedia(photographerMedia)
 }
 
 init();

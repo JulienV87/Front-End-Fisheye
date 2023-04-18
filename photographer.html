@@ -21,6 +21,8 @@
 
      
       <div class="photograph-header"></div>
+
+      <!-- <div class="like-price"></div> -->
      
 
       <div class="photograph-media">
@@ -35,6 +37,13 @@
       <div class="media-container"></div>
 
     </main>
+
+    <div class="infoPhotographerDisplay">
+      <span class="likesInfoPhotographer">
+        <p class="likesContainer">460</p><img class="logoLikes" src="../assets/icons/heartB.svg" alt="logo like" />
+      </span>
+      <p class="info-prix">500 €/jour</p>
+    </div>
 
 
    <!-- contact form -->
@@ -72,9 +81,34 @@
   </div>
 </div>
 
+<!-- Lightbox -->
+<div id="lightbox_modal" aria-hidden="true">
+        <div role="dialog" aria-label="Vue rapprochée du média" class="lightbox">
+            <div class="lightbox_left">
+                <a href="#" id="previousMedia" onclick="previousMedia()" role="link" aria-label="Média précédent" >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+
+            </div>
+            <div class="lightbox_center">
+
+            </div>
+            <div class="lightbox_right">
+                <a href="#" id="nextMedia" onclick="nextMedia()" role="link" aria-label="Média suivant" >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+
+                <a href="#" aria-label="Fermer la boîte de dialogue" role="button" class="close">
+                    <i class="fa-regular fa-x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
     <script src="scripts/factories/media-factory.js"></script>
     <script src="scripts/factories/profile-factory.js"></script>
+    <script src="/scripts/utils/lightbox_new.js"></script>
     <script src="/scripts/pages/photographer-pages.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="https://kit.fontawesome.com/865ef6aba0.js" crossorigin="anonymous"></script>
   </body>
 </html>

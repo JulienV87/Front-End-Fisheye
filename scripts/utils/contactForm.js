@@ -1,6 +1,6 @@
 const modal = document.getElementById("contact_modal");
-const header = document.querySelector('.header');
-const main = document.querySelector('.main');
+const header = document.querySelector('header');
+const main = document.querySelector('main');
 
 const contactModalForm = document.querySelector('#contact_modal__form').addEventListener("submit",validate);
 
@@ -37,7 +37,7 @@ function closeModal() {
     header.setAttribute('aria-hidden', 'false');
     main.style.opacity = '1';
     main.setAttribute('aria-hidden', 'false');
-    contactModalForm.focus();
+    // closeModalIcon.focus();
 }
 
 function addError(element, message) {

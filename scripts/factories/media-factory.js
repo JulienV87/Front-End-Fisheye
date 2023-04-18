@@ -14,8 +14,10 @@ function mediaFactory(data) {
       <source src="${mediaUrl}" type="video/mp4">
     </video>`;
   }
+  
 
   function getUserMediaDOM() {
+    
     
     return `<article class="media"
               data-id=${id}
@@ -30,7 +32,7 @@ function mediaFactory(data) {
         ${imageOrVideo}
       </div>
       <div class="media-text-wrapper">
-        <span class="medi-title">${title}</span>
+        <span class="media-title">${title}</span>
         <span>
           <span class="media-likes">${likes}</span>
           <span class="media-like-button">&hearts;</span>
@@ -40,5 +42,6 @@ function mediaFactory(data) {
   }
 
   return { getUserMediaDOM };
+
 }
 

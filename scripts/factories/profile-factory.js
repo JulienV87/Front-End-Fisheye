@@ -18,10 +18,13 @@ function getUserHeaderDOM() {
     section.setAttribute('class', 'section-header')
     const info = document.createElement('div')
     const h1 = document.createElement('h1')
+    // h1.setAttribute('class', 'profile_name_h1')
     h1.textContent = name
     const h2 = document.createElement('h2')
+    h2.setAttribute('class', 'profile_location_h2')
     h2.textContent = `${city}, ${country}`
     const p = document.createElement('p')
+    p.setAttribute('class', 'profile_tagline')
     p.textContent = tagline
     const priceInfo = document.createElement('p')
     priceInfo.textContent = `${price}/jours`
