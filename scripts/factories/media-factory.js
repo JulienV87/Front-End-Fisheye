@@ -20,13 +20,13 @@ function mediaFactory(data) {
     
     
     return `<article class="media"
-              data-id=${id}
-              data-photographer-id=${photographerId}
-              data-image=${image}
-              data-video=${video}
-              data-likes=${likes}
-              data-date=${date}
-              data-title=${title}
+              data-id="${id}"
+              data-photographer-id="${photographerId}"
+              data-image="${image}"
+              data-video="${video}"
+              data-likes="${likes}"
+              data-date="${date}"
+              data-title="${title}"
             >
         <div class="media-img-wrapper">
         ${imageOrVideo}
@@ -39,9 +39,14 @@ function mediaFactory(data) {
         </span>
       </div>
       </article>`;
+      
   }
 
   return { getUserMediaDOM };
 
+
+  
+  
 }
+
 

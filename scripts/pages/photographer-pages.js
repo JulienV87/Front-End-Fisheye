@@ -96,6 +96,25 @@ function sortMedia(mediaList) {
 
 }
 
+/////////////
+
+
+
+// Fonction qui affichera le nombre total de likes et le prix d'un photographe
+function likePrix() {
+  
+    document.querySelector(".infoPhotographerDisplay").innerHTML =
+    `
+    <span class="likesInfoPhotographer">
+        <p class="likesContainer">460</p><img class="logoLikes" src="../assets/icons/heartB.svg" alt="logo like" />
+      </span>
+      <p class="info-prix">500 €/jour</p>
+    `
+  }
+
+likePrix();
+
+////////////
 
 
 async function init() {
