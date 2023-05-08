@@ -25,6 +25,7 @@ function mediaFactory(data) {
               data-image="${image}"
               data-video="${video}"
               data-likes="${likes}"
+              data-is-liked= "0"
               data-date="${date}"
               data-title="${title}"
             >
@@ -35,7 +36,7 @@ function mediaFactory(data) {
         <span class="media-title">${title}</span>
         <span>
           <span class="media-likes">${likes}</span>
-          <span class="media-like-button">&hearts;</span>
+          <span class="media-like-button" data-is-liked= "0">&hearts;</span>
         </span>
       </div>
       </article>`;

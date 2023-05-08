@@ -35,6 +35,7 @@ function displayProfile(photographerProfile) {
   const headerModel = profilFactory(photographerProfile)
   const userHeaderDOM = headerModel.getUserHeaderDOM()
   headerSection.appendChild(userHeaderDOM)
+  document.querySelector('.info-prix').textContent = photographerProfile.price
 }
 
 //Display Media
@@ -97,22 +98,48 @@ function sortMedia(mediaList) {
 }
 
 /////////////
+//Incrémenter les likes
+
+function handleLikesButton(){
+  const addLikesButton = document.querySelectorAll(".media-like-button");
+
+  addLikesButton.forEach((button) => {
+    button.addEventListener("click", () => {
+
+      const likes = button.previousElementSibling;
+
+      if (button.dataset.isLiked == 0) {
+        likes.textContent = parseInt(likes.textContent) + 1;
+        button.style.color = "red";
+        button.dataset.isLiked = 1;
+      }
+      else if (button.dataset.isLiked == 1){ 
+        likes.textContent = parseInt(likes.textContent) - 1;
+        button.style.color = "#901C1C";
+        button.dataset.isLiked = 0;
+      }
+      
+      handleTotalLikes()
+
+    });
+  });
+}
 
 
 
-// Fonction qui affichera le nombre total de likes et le prix d'un photographe
-function likePrix() {
-  
-    document.querySelector(".infoPhotographerDisplay").innerHTML =
-    `
-    <span class="likesInfoPhotographer">
-        <p class="likesContainer">460</p><img class="logoLikes" src="../assets/icons/heartB.svg" alt="logo like" />
-      </span>
-      <p class="info-prix">500 €/jour</p>
-    `
-  }
 
-likePrix();
+function handleTotalLikes() {
+  let total = 0;
+  const likes = document.querySelectorAll(".media-likes");
+  likes.forEach((like) => {
+    total += parseInt(like.textContent);
+    console.log(total)
+  });
+
+  document.querySelector(".likesContainer").textContent = total
+}
+
+
 
 ////////////
 
@@ -128,6 +155,8 @@ async function init() {
   displayProfile(photographerProfile)
   displayMedia(photographerMedia)
   sortMedia(photographerMedia)
+  handleLikesButton()
+  handleTotalLikes()
 }
 
 init();

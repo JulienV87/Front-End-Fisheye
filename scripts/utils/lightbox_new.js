@@ -4,6 +4,7 @@ var lightboxApp = {
     init: function() {
         lightboxApp.initCloseLightbox();
         lightboxApp.initNextAndPreviousMedia();
+       
 
     },
     initNextAndPreviousMedia: function() {
@@ -18,7 +19,7 @@ var lightboxApp = {
 
     },
     nextMedia: function() { 
-        const allMediaLightbox = document.querySelectorAll(".media");
+        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
         for (let i = 0; i < allMediaLightbox.length; i++) {
             let mediaContainer = allMediaLightbox[i];
             if (mediaContainer.dataset.selected == 1) {
@@ -36,7 +37,7 @@ var lightboxApp = {
         }
     },
     previousMedia: function() { 
-        const allMediaLightbox = document.querySelectorAll(".media");
+        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
         for (let i = 0; i < allMediaLightbox.length; i++) {
             let mediaContainer = allMediaLightbox[i];
             if (mediaContainer.dataset.selected == 1) {
@@ -57,18 +58,19 @@ var lightboxApp = {
 
 
     addMediaLightbox: function(elementClicked) {
-        // vider le contenu precedent/existant
-        const allMediaLightbox = document.querySelectorAll(".media");
+        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
+        
         allMediaLightbox.forEach(mediaElement => {
             mediaElement.dataset.selected = 0;
         });
+        
         const targetMediaContainer = lightboxApp.getTargetMediaContainer(elementClicked);
         targetMediaContainer.dataset.selected = 1;
         const targetMedia = targetMediaContainer.querySelector(".media-img");
         const mediaLightbox = document.querySelector('.lightbox_center');
         mediaLightbox.innerHTML = null;
         let newMedia = targetMedia.cloneNode(true);
-        let newTitle = targetMedia.parentNode.nextSibling.cloneNode(true);  // TODO refactor
+        let newTitle = targetMedia.parentNode.nextSibling.cloneNode(true);  
     
         if (newMedia.tagName === 'VIDEO') {
             newMedia.setAttribute('controls', 'true');
@@ -84,7 +86,7 @@ var lightboxApp = {
         mediaLightbox.appendChild(newTitle);
     },
     handleLightBox: function() {
-        const allMediaLightbox = document.getElementsByClassName('media');
+        const allMediaLightbox = document.getElementsByClassName('media-img-wrapper');
         for (let i = 0; i < allMediaLightbox.length; i++) {
           allMediaLightbox[i].addEventListener('click', lightboxApp.openLightbox);
         }
@@ -117,9 +119,11 @@ var lightboxApp = {
         lightboxModal.style.display = 'none';
         lightboxModal.setAttribute('aria-hidden', 'true');
     },
+
+
     getTargetMediaContainer: function(element) {
         let targetMedia = element;
-        if (targetMedia.classList.contains("media")) {
+        if (targetMedia.classList.contains("media-img-wrapper")) {
             return targetMedia;
         } else {
             return lightboxApp.getTargetMediaContainer(targetMedia.parentNode);
