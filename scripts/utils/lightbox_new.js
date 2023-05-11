@@ -4,12 +4,17 @@ var lightboxApp = {
     init: function() {
         lightboxApp.initCloseLightbox();
         lightboxApp.initNextAndPreviousMedia();
-       
+        lightboxApp.addMediaTitle();
+        
 
+
+        
     },
     initNextAndPreviousMedia: function() {
         const nextMediaLink = document.querySelector("#nextMediaLink");
         const previousMediaLink = document.querySelector("#previousMediaLink");
+        
+
         if (nextMediaLink) {
             nextMediaLink.addEventListener("click", lightboxApp.nextMedia);
         }
@@ -29,8 +34,6 @@ var lightboxApp = {
                 }
                 let nextMediaContainer = allMediaLightbox[nextMediaIndex];
 
-                console.log(nextMediaContainer)
-
                 lightboxApp.addMediaLightbox(nextMediaContainer);
                 break;
             }
@@ -38,6 +41,7 @@ var lightboxApp = {
     },
     previousMedia: function() { 
         const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
+        console.log(allMediaLightbox)
         for (let i = 0; i < allMediaLightbox.length; i++) {
             let mediaContainer = allMediaLightbox[i];
             if (mediaContainer.dataset.selected == 1) {
@@ -47,30 +51,65 @@ var lightboxApp = {
                 }
                 let previousMediaContainer = allMediaLightbox[previousMediaIndex];
 
-                console.log(previousMediaContainer)
-
                 lightboxApp.addMediaLightbox(previousMediaContainer);
                 break;
             }
         }
     },
 
+    //Ajout du titre de la photo dans la lightbox
+    addMediaTitle: function() {
+        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
+        for (let i = 0; i < allMediaLightbox.length; i++) {
+            let mediaContainer = allMediaLightbox[i];
+            if (mediaContainer.dataset.selected == 1) {
+                let mediaTitle = mediaContainer.querySelector(".media-title");
+                let mediaTitleContainer = mediaTitle.parentNode;
+                lightboxApp.addMediaLightbox(mediaTitleContainer);
+                break;
+            }
+        }
 
+        // const allMediaTitle = document.querySelectorAll('.media-title');
+        // console.log(allMediaTitle)
+    
+        // for(i = 0; i < allMediaTitle.length; i++) {
+    
+        //     let mediaTitle = allMediaTitle[i];
+        //     if (mediaTitle.dataset.selected == 1) {
+        //         let mediaTitleIndex = i + 1;
+        //         if (mediaTitleIndex == allMediaTitle.length) {
+        //             mediaTitleIndex = 0;
+        //         }
+        //         let mediaTitleContainer = allMediaTitle[mediaTitleIndex];
+    
+        //         lightboxApp.addMediaLightbox(mediaTitleContainer);
+        //         break;
+        //     }
+        // }
+    },
 
     addMediaLightbox: function(elementClicked) {
+
         const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
-        
+
         allMediaLightbox.forEach(mediaElement => {
+           
             mediaElement.dataset.selected = 0;
         });
         
         const targetMediaContainer = lightboxApp.getTargetMediaContainer(elementClicked);
+        
         targetMediaContainer.dataset.selected = 1;
+
         const targetMedia = targetMediaContainer.querySelector(".media-img");
+        
         const mediaLightbox = document.querySelector('.lightbox_center');
+        
         mediaLightbox.innerHTML = null;
         let newMedia = targetMedia.cloneNode(true);
         let newTitle = targetMedia.parentNode.nextSibling.cloneNode(true);  
+
     
         if (newMedia.tagName === 'VIDEO') {
             newMedia.setAttribute('controls', 'true');
@@ -85,16 +124,17 @@ var lightboxApp = {
 
         mediaLightbox.appendChild(newTitle);
     },
+
     handleLightBox: function() {
         const allMediaLightbox = document.getElementsByClassName('media-img-wrapper');
         for (let i = 0; i < allMediaLightbox.length; i++) {
           allMediaLightbox[i].addEventListener('click', lightboxApp.openLightbox);
         }
     },
+  
     openLightbox: function(event) {
         const mediaLightbox = document.querySelector('.lightbox_center');
         const lightboxModal = document.getElementById('lightbox_modal');
-        console.log('media cliqué')
         event.target.setAttribute('lightbox', 'true')
         mediaLightbox.innerHTML = "";
     
@@ -105,11 +145,26 @@ var lightboxApp = {
         lightboxModal.style.display = 'block';
         lightboxModal.setAttribute('aria-hidden', 'false');
         lightboxApp.addMediaLightbox(event.target);
+
+
     },
+    
     initCloseLightbox: function() {
         const closeBtn = document.querySelector('.lightbox_right .close');
         closeBtn.addEventListener("click", lightboxApp.closeLightbox);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                lightboxApp.closeLightbox();
+            } else if (event.key === 'ArrowRight') {
+                lightboxApp.nextMedia();
+            } else if (event.key === 'ArrowLeft') {
+                lightboxApp.previousMedia();
+            }
+        });
     },
+
+
     closeLightbox: function() {
         const lightboxModal = document.getElementById('lightbox_modal');
         // eslint-disable-next-line no-undef
@@ -121,8 +176,10 @@ var lightboxApp = {
     },
 
 
+
     getTargetMediaContainer: function(element) {
         let targetMedia = element;
+      
         if (targetMedia.classList.contains("media-img-wrapper")) {
             return targetMedia;
         } else {
@@ -130,5 +187,7 @@ var lightboxApp = {
         }
     }
 }
+
+    
 
 lightboxApp.init()

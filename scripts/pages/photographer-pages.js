@@ -36,12 +36,15 @@ function displayProfile(photographerProfile) {
   const userHeaderDOM = headerModel.getUserHeaderDOM()
   headerSection.appendChild(userHeaderDOM)
   document.querySelector('.info-prix').textContent = photographerProfile.price
+  
 }
 
 //Display Media
 
 function displayMedia(photographerMedia) {
   const containerMedia = document.querySelector('.media-container')
+
+
   let template = ""
   photographerMedia.forEach(media => {
 
@@ -64,6 +67,7 @@ function displayMedia(photographerMedia) {
 
 function sortMedia(mediaList) {
   const selectSorting = document.getElementById("sort-media");
+
 
   selectSorting.addEventListener('change', () => {
 
@@ -93,6 +97,8 @@ function sortMedia(mediaList) {
       });
 
     displayMedia(mediaList)
+    handleLikesButton()
+
   })
 
 }
@@ -133,7 +139,7 @@ function handleTotalLikes() {
   const likes = document.querySelectorAll(".media-likes");
   likes.forEach((like) => {
     total += parseInt(like.textContent);
-    console.log(total)
+   
   });
 
   document.querySelector(".likesContainer").textContent = total

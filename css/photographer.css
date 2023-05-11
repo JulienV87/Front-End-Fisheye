@@ -233,6 +233,15 @@ main {
     /* background-color: purple; */
 }
 
+.display-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 12px;
+    margin-left: 27%;
+    color: #901C1C;
+    ;
+}
+
 
 /* info likes and price box   */
 .infoPhotographerDisplay {
@@ -281,7 +290,7 @@ main {
 
 /* Light box Modal */
 #lightbox_modal {
-    display: none;
+    display: none;  
     position: fixed;
     left: 0;
     top: 80px;
@@ -290,6 +299,7 @@ main {
     background: white;
     z-index: 1;
 }
+
 
 .lightbox {
     position: relative;

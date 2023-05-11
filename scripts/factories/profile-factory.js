@@ -18,7 +18,6 @@ function getUserHeaderDOM() {
     section.setAttribute('class', 'section-header')
     const info = document.createElement('div')
     const h1 = document.createElement('h1')
-    // h1.setAttribute('class', 'profile_name_h1')
     h1.textContent = name
     const h2 = document.createElement('h2')
     h2.setAttribute('class', 'profile_location_h2')
@@ -44,7 +43,6 @@ function getUserHeaderDOM() {
     info.appendChild(p)
     section.appendChild(btn)
     section.appendChild(img)
-    // infoBox.appendChild(priceInfo)
 
     return section
   }
