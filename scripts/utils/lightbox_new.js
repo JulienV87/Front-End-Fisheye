@@ -24,7 +24,7 @@ var lightboxApp = {
 
     },
     nextMedia: function() { 
-        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
+        const allMediaLightbox = document.querySelectorAll(".media");
         for (let i = 0; i < allMediaLightbox.length; i++) {
             let mediaContainer = allMediaLightbox[i];
             if (mediaContainer.dataset.selected == 1) {
@@ -40,7 +40,7 @@ var lightboxApp = {
         }
     },
     previousMedia: function() { 
-        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
+        const allMediaLightbox = document.querySelectorAll(".media");
         console.log(allMediaLightbox)
         for (let i = 0; i < allMediaLightbox.length; i++) {
             let mediaContainer = allMediaLightbox[i];
@@ -90,8 +90,8 @@ var lightboxApp = {
     },
 
     addMediaLightbox: function(elementClicked) {
-
-        const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
+        const modalContainer = document.querySelector('#lightbox_modal');
+        const allMediaLightbox = document.querySelectorAll(".media");
 
         allMediaLightbox.forEach(mediaElement => {
            
@@ -105,24 +105,25 @@ var lightboxApp = {
         const targetMedia = targetMediaContainer.querySelector(".media-img");
         
         const mediaLightbox = document.querySelector('.lightbox_center');
-        
+    
         mediaLightbox.innerHTML = null;
         let newMedia = targetMedia.cloneNode(true);
-        let newTitle = targetMedia.parentNode.nextSibling.cloneNode(true);  
+        const mediaTitleContainer = modalContainer.querySelector('.display-title');
+
+        mediaTitleContainer.innerText = targetMediaContainer.dataset.title;
 
     
         if (newMedia.tagName === 'VIDEO') {
             newMedia.setAttribute('controls', 'true');
         }
     
-        newMedia.alt = newTitle.textContent;
+        newMedia.alt = targetMediaContainer.dataset.title;
         newMedia.className = 'media_lightbox';
         newMedia.removeAttribute('onclick');
         newMedia.removeAttribute('lightbox');
 
         mediaLightbox.appendChild(newMedia);
 
-        mediaLightbox.appendChild(newTitle);
     },
 
     handleLightBox: function() {
@@ -141,7 +142,7 @@ var lightboxApp = {
         // eslint-disable-next-line no-undef
         main.style.display = 'none';
         // eslint-disable-next-line no-undef
-        main.setAttribute('aria-hidden', 'true');
+        // main.setAttribute('aria-hidden', 'true');  TODO peut etre serve a rien, a supprimer ?
         lightboxModal.style.display = 'block';
         lightboxModal.setAttribute('aria-hidden', 'false');
         lightboxApp.addMediaLightbox(event.target);
@@ -180,7 +181,7 @@ var lightboxApp = {
     getTargetMediaContainer: function(element) {
         let targetMedia = element;
       
-        if (targetMedia.classList.contains("media-img-wrapper")) {
+        if (targetMedia.classList.contains("media")) {
             return targetMedia;
         } else {
             return lightboxApp.getTargetMediaContainer(targetMedia.parentNode);
