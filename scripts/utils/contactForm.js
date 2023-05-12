@@ -13,8 +13,6 @@ const message = document.getElementById('message');
 const submit = document.getElementById('submit');
 const form = document.querySelector('.modal form');
 
-
-
 const name_regex = /^[A-zÀ-ú]+$/;
 
 const mail_regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -29,7 +27,6 @@ function displayModal() {
     firstName.focus();
 }
 
-
 function closeModal() {
     modal.style.display = "none";
     modal.setAttribute('aria-hidden', 'true')
@@ -37,7 +34,6 @@ function closeModal() {
     header.setAttribute('aria-hidden', 'false');
     main.style.opacity = '1';
     main.setAttribute('aria-hidden', 'false');
-    // closeModalIcon.focus();
 }
 
 function addError(element, message) {
@@ -60,7 +56,6 @@ function removeError(element) {
     return true;
 }
 
-
 function checkError(element, nbCharacters, message, regex) {
     if (regex) {
 
@@ -75,7 +70,6 @@ function checkError(element, nbCharacters, message, regex) {
         }
 
     } else {
-
         if (element.value.length < nbCharacters) {
 
             return addError(element, message);
@@ -106,8 +100,6 @@ function validate(event) {
             return false;
 
         } else {
-
-           
             document.querySelectorAll('.formData').forEach(e => e.style.transform = "translateX(-9999px)");
 
             const formValidate = document.createElement("p");
@@ -118,7 +110,6 @@ function validate(event) {
             submit.textContent = "Fermer";
 
             return false;
-
         }
 
     } else {

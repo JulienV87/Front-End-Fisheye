@@ -5,23 +5,17 @@ var lightboxApp = {
         lightboxApp.initCloseLightbox();
         lightboxApp.initNextAndPreviousMedia();
         lightboxApp.addMediaTitle();
-        
-
-
-        
     },
     initNextAndPreviousMedia: function() {
         const nextMediaLink = document.querySelector("#nextMediaLink");
         const previousMediaLink = document.querySelector("#previousMediaLink");
         
-
         if (nextMediaLink) {
             nextMediaLink.addEventListener("click", lightboxApp.nextMedia);
         }
         if (previousMediaLink) {
             previousMediaLink.addEventListener("click", lightboxApp.previousMedia);
         }
-
     },
     nextMedia: function() { 
         const allMediaLightbox = document.querySelectorAll(".media");
@@ -56,8 +50,6 @@ var lightboxApp = {
             }
         }
     },
-
-    //Ajout du titre de la photo dans la lightbox
     addMediaTitle: function() {
         const allMediaLightbox = document.querySelectorAll(".media-img-wrapper");
         for (let i = 0; i < allMediaLightbox.length; i++) {
@@ -69,26 +61,7 @@ var lightboxApp = {
                 break;
             }
         }
-
-        // const allMediaTitle = document.querySelectorAll('.media-title');
-        // console.log(allMediaTitle)
-    
-        // for(i = 0; i < allMediaTitle.length; i++) {
-    
-        //     let mediaTitle = allMediaTitle[i];
-        //     if (mediaTitle.dataset.selected == 1) {
-        //         let mediaTitleIndex = i + 1;
-        //         if (mediaTitleIndex == allMediaTitle.length) {
-        //             mediaTitleIndex = 0;
-        //         }
-        //         let mediaTitleContainer = allMediaTitle[mediaTitleIndex];
-    
-        //         lightboxApp.addMediaLightbox(mediaTitleContainer);
-        //         break;
-        //     }
-        // }
     },
-
     addMediaLightbox: function(elementClicked) {
         const modalContainer = document.querySelector('#lightbox_modal');
         const allMediaLightbox = document.querySelectorAll(".media");
@@ -103,6 +76,7 @@ var lightboxApp = {
         targetMediaContainer.dataset.selected = 1;
 
         const targetMedia = targetMediaContainer.querySelector(".media-img");
+      
         
         const mediaLightbox = document.querySelector('.lightbox_center');
     
@@ -111,7 +85,6 @@ var lightboxApp = {
         const mediaTitleContainer = modalContainer.querySelector('.display-title');
 
         mediaTitleContainer.innerText = targetMediaContainer.dataset.title;
-
     
         if (newMedia.tagName === 'VIDEO') {
             newMedia.setAttribute('controls', 'true');
@@ -125,18 +98,33 @@ var lightboxApp = {
         mediaLightbox.appendChild(newMedia);
 
     },
-
     handleLightBox: function() {
         const allMediaLightbox = document.getElementsByClassName('media-img-wrapper');
         for (let i = 0; i < allMediaLightbox.length; i++) {
-          allMediaLightbox[i].addEventListener('click', lightboxApp.openLightbox);
+          allMediaLightbox[i].addEventListener('click', lightboxApp.handleMediaClick);
         }
+
+        document.addEventListener('keydown', (event) => {
+            const activeElement = document.activeElement
+
+            console.log(activeElement)
+          
+            if(event.key == 'Enter'  && (activeElement.tagName == 'IMG' || activeElement.tagName == 'VIDEO')) {
+              // ouvrir la lightbox
+              lightboxApp.openLightbox(activeElement)
+            }
+          }) 
     },
-  
-    openLightbox: function(event) {
+
+    handleMediaClick: function(event) {
+        lightboxApp.openLightbox(event.target)
+    },
+
+
+    openLightbox: function(element) {
         const mediaLightbox = document.querySelector('.lightbox_center');
         const lightboxModal = document.getElementById('lightbox_modal');
-        event.target.setAttribute('lightbox', 'true')
+        element.setAttribute('lightbox', 'true')
         mediaLightbox.innerHTML = "";
     
         // eslint-disable-next-line no-undef
@@ -145,11 +133,8 @@ var lightboxApp = {
         // main.setAttribute('aria-hidden', 'true');  TODO peut etre serve a rien, a supprimer ?
         lightboxModal.style.display = 'block';
         lightboxModal.setAttribute('aria-hidden', 'false');
-        lightboxApp.addMediaLightbox(event.target);
-
-
+        lightboxApp.addMediaLightbox(element);
     },
-    
     initCloseLightbox: function() {
         const closeBtn = document.querySelector('.lightbox_right .close');
         closeBtn.addEventListener("click", lightboxApp.closeLightbox);
@@ -164,8 +149,6 @@ var lightboxApp = {
             }
         });
     },
-
-
     closeLightbox: function() {
         const lightboxModal = document.getElementById('lightbox_modal');
         // eslint-disable-next-line no-undef
@@ -175,9 +158,6 @@ var lightboxApp = {
         lightboxModal.style.display = 'none';
         lightboxModal.setAttribute('aria-hidden', 'true');
     },
-
-
-
     getTargetMediaContainer: function(element) {
         let targetMedia = element;
       

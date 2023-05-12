@@ -10,9 +10,6 @@ function profilFactory(data) {
     titleContactName.innerHTML = `Contactez-moi ${name}`
 
 
-   
-
-// creation of elements
 function getUserHeaderDOM() {
     const section = document.createElement('section')
     section.setAttribute('class', 'section-header')

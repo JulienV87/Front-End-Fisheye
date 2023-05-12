@@ -35,15 +35,12 @@ function displayProfile(photographerProfile) {
   const headerModel = profilFactory(photographerProfile)
   const userHeaderDOM = headerModel.getUserHeaderDOM()
   headerSection.appendChild(userHeaderDOM)
-  document.querySelector('.info-prix').textContent = photographerProfile.price
-  
+  document.querySelector('.info-prix').textContent = photographerProfile.price 
 }
 
 //Display Media
-
 function displayMedia(photographerMedia) {
   const containerMedia = document.querySelector('.media-container')
-
 
   let template = ""
   photographerMedia.forEach(media => {
@@ -60,11 +57,7 @@ function displayMedia(photographerMedia) {
   lightboxApp.handleLightBox()
 }
 
-
-
 //Display Filtered Media
-
-
 function sortMedia(mediaList) {
   const selectSorting = document.getElementById("sort-media");
 
