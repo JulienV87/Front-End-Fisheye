@@ -130,7 +130,7 @@ var lightboxApp = {
         // eslint-disable-next-line no-undef
         main.style.display = 'none';
         // eslint-disable-next-line no-undef
-        // main.setAttribute('aria-hidden', 'true');  TODO peut etre serve a rien, a supprimer ?
+        main.setAttribute('aria-hidden', 'true');  
         lightboxModal.style.display = 'block';
         lightboxModal.setAttribute('aria-hidden', 'false');
         lightboxApp.addMediaLightbox(element);
