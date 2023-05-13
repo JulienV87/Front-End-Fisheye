@@ -91,9 +91,7 @@ function sortMedia(mediaList) {
 
     displayMedia(mediaList)
     handleLikesButton()
-
   })
-
 }
 
 /////////////
@@ -103,28 +101,43 @@ function handleLikesButton(){
   const addLikesButton = document.querySelectorAll(".media-like-button");
 
   addLikesButton.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("keydown", (event) => {
 
       const likes = button.previousElementSibling;
 
-      if (button.dataset.isLiked == 0) {
+      if (event.key == 'Enter'  && button.dataset.isLiked == 0) {
         likes.textContent = parseInt(likes.textContent) + 1;
         button.style.color = "red";
         button.dataset.isLiked = 1;
       }
-      else if (button.dataset.isLiked == 1){ 
+      else if (event.key == 'Enter'  && button.dataset.isLiked == 1){ 
         likes.textContent = parseInt(likes.textContent) - 1;
         button.style.color = "#901C1C";
         button.dataset.isLiked = 0;
       }
       
+      document.addEventListener('keydown', (event) => {
+        const activeElement = document.activeElement
+      
+        if(event.key == 'Enter'  && (activeElement.tagName == 'SPAN' && activeElement.className == '.media-like-button')) {
+
+          if (button.dataset.isLiked == 0) {
+            likes.textContent = parseInt(likes.textContent) + 1;
+            button.style.color = "red";
+            button.dataset.isLiked = 1;
+          }
+          else if (button.dataset.isLiked == 1){ 
+            likes.textContent = parseInt(likes.textContent) - 1;
+            button.style.color = "#901C1C";
+            button.dataset.isLiked = 0;
+          }
+        }
+      }) 
       handleTotalLikes()
 
     });
   });
 }
-
-
 
 
 function handleTotalLikes() {
