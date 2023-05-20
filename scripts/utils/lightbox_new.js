@@ -120,7 +120,6 @@ var lightboxApp = {
         lightboxApp.openLightbox(event.target)
     },
 
-
     openLightbox: function(element) {
         const mediaLightbox = document.querySelector('.lightbox_center');
         const lightboxModal = document.getElementById('lightbox_modal');
@@ -168,7 +167,5 @@ var lightboxApp = {
         }
     }
 }
-
-    
 
 lightboxApp.init()

@@ -120,7 +120,6 @@ function handleLikes() {
   });
 }
 
-
 function handleLikesEnterKey(){
   const addLikesButton = document.querySelectorAll(".media-like-button");
 
@@ -163,7 +162,6 @@ function handleLikesEnterKey(){
   });
 }
 
-
 function handleTotalLikes() {
   let total = 0;
   const likes = document.querySelectorAll(".media-likes");
@@ -175,10 +173,7 @@ function handleTotalLikes() {
   document.querySelector(".likesContainer").textContent = total
 }
 
-
-
 ////////////
-
 
 async function init() {
 
